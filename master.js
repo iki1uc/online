@@ -4,10 +4,7 @@ export const MASTER = (online) => {
     cpu: 90,
     ram: 90,
     gpu: 90,
-    status: "clean",
-    visitors: online.visitors,
-    working: online.working.length,
-    waiting: online.waiting.length
+    clone_hit: (online.clone.x + online.clone.y + online.clone.z) / 3,
+    status: "clean"
   };
 };
-

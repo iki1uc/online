@@ -1,14 +1,14 @@
 <pre id="out"></pre>
 <script type="module">
+  import "./clone.js";
   import { ONLINE } from "./online.js";
-  const out = document.getElementById("out");
 
   function tick(){
     const data = ONLINE();
-    out.textContent = JSON.stringify(data, null, 2);
+    document.getElementById("out").textContent =
+      JSON.stringify(data, null, 2);
   }
 
   tick();
   setInterval(tick, 2000);
 </script>
-

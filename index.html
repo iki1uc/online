@@ -1,16 +1,38 @@
+<pre id="index"></pre>
 
-<pre>
-RESPO 100 :: MEGA-INDEX
---------------------------------
-0   → ROOT
-1   → WpiR
-2   → dir
-3   → RUN8
-4   → FIT
-5   → FAIL
-6   → 9vec3tor
-99  → 3hit90
-100 → MEGA-INDEX
---------------------------------
-Übergang aktiv
-</pre>
+<script type="module">
+  import { RAW } from "./respo.js";
+  import { RESPO_MAP } from "./respo-map.js";
+
+  function colorIcon(status){
+    if(status === "green")  return "🟩";
+    if(status === "yellow") return "🟨";
+    if(status === "red")    return "🟥";
+    if(status === "blue")   return "🟦";
+  }
+
+  function render(){
+    let out = "RESPO 100 :: MEGA-INDEX\n--------------------------------\n";
+
+    Object.keys(RAW).forEach((key, i) => {
+      const r = RAW[key];
+      const color = colorIcon(r.status);
+      const tmp = r.tmp;
+      const path = RESPO_MAP[key] || "kein-pfad";
+
+      out += `${(i+1).toString().padEnd(4)} → ((${key})) ${color} tmp:${tmp}`;
+
+      if(r.status === "green"){
+        out += `\n NAVI → ${path}`;
+      }
+
+      out += "\n";
+    });
+
+    out += "--------------------------------\nNC.link aktiv\nÜbergang aktiv\n";
+
+    document.getElementById("index").textContent = out;
+  }
+
+  render();
+</script>
